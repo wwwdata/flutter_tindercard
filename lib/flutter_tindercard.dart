@@ -16,6 +16,7 @@ class TinderSwapCard extends StatefulWidget {
   CardSwipeCompleteCallback swipeCompleteCallback;
   CardDragUpdateCallback swipeUpdateCallback;
   CardController cardController;
+  Widget emptyPlaceholder;
 
 //  double _maxWidth;
 //  double _minWidth;
@@ -43,7 +44,8 @@ class TinderSwapCard extends StatefulWidget {
       double minHeight,
       this.cardController,
       this.swipeCompleteCallback,
-      this.swipeUpdateCallback})
+      this.swipeUpdateCallback,
+      this.emptyPlaceholder})
       : this._cardBuilder = cardBuilder,
         assert(stackNum > 1),
         this._stackNum = stackNum,
@@ -97,7 +99,7 @@ class _TinderSwapCardState extends State<TinderSwapCard>
 
   Widget _buildCard(BuildContext context, int realIndex) {
     if (realIndex < 0) {
-      return Container();
+      return widget.emptyPlaceholder ?? Container();
     }
     int index = realIndex - _currentFront;
 
